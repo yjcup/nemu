@@ -14,6 +14,7 @@
  ***************************************************************************************/
 
 #include "sdb.h"
+#include "utils.h"
 #include <cpu/cpu.h>
 #include <isa.h>
 #include <readline/history.h>
@@ -49,6 +50,7 @@ static int cmd_c(char *args) {
 }
 
 static int cmd_q(char *args) {
+  nemu_state.halt_ret = 0;
   return -1;
   /*return 0;*/
 }
