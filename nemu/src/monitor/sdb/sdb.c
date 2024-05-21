@@ -73,6 +73,8 @@ static struct {
     {"c", "Continue the execution of the program", cmd_c},
     {"q", "Exit NEMU", cmd_q},
     {"si", "step", cmd_si},
+    {"info", "print regs or point info", cmd_si},
+    {"info", "print regs or point info", cmd_si},
 
     /* TODO: Add more commands */
 
