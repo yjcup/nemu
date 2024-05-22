@@ -58,7 +58,11 @@ static int cmd_q(char *args) {
 
 static int cmd_si(char *args) {
   // extract the first argument
-  cpu_exec(1);
+	if(args==NULL){
+		cpu_exec(1);
+	}else{
+		
+	}
   return 0;
 }
 
