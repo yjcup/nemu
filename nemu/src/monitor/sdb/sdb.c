@@ -90,7 +90,7 @@ static int cmd_info(char *args) {
 
   char *arg = strtok(NULL, " ");
   if (strlen(arg) != 1) {
-    printf("invaild input!!!");
+    printf("length:invaild input!!!\n");
   } else {
     switch (arg[0]) {
     case 'e':
@@ -98,7 +98,7 @@ static int cmd_info(char *args) {
       printf("todo watchpoint!!!\n");
       break;
     default:
-      printf("invaild input !!!");
+      printf("unknown command:invaild input !!!\n");
     }
   }
 
