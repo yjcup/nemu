@@ -19,6 +19,7 @@
 #include <isa.h>
 #include <readline/history.h>
 #include <readline/readline.h>
+#include <stdint.h>
 
 static int is_batch_mode = false;
 
@@ -58,11 +59,13 @@ static int cmd_q(char *args) {
 
 static int cmd_si(char *args) {
   // extract the first argument
-	if(args==NULL){
-		cpu_exec(1);
-	}else{
-		
-	}
+  char *arg = strtok(NULL, " ");
+  if (args == NULL) {
+    cpu_exec(1);
+  } else {
+    uint64_t n = *(uint64_t *)arg;
+    printf("cpu_exec:%lu\n", n);
+  }
   return 0;
 }
 
