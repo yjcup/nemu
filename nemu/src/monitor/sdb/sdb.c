@@ -67,7 +67,7 @@ static int cmd_si(char *args) {
     int len = strlen(arg);
     uint64_t n = 0;
     for (int i = 0; i < len; i++) {
-      uint8_t num_str = arg[i] & 0b11111;
+      uint8_t num_str = arg[i] & 0b1111;
       printf("%u\n", num_str);
       if (num_str >= 0 && num_str <= 9) {
         n += num_str * (len - i);
