@@ -20,6 +20,7 @@
 #include <readline/history.h>
 #include <readline/readline.h>
 #include <stdint.h>
+#include <time.h>
 
 static int is_batch_mode = false;
 
@@ -85,7 +86,24 @@ static int cmd_si(char *args) {
   return 0;
 }
 
-static int cmd_info(char *args) { return -1; }
+static int cmd_info(char *args) {
+
+  char *arg = strtok(NULL, "");
+  if (strlen(arg) != 1) {
+    printf("invaild input!!!");
+  } else {
+    switch (arg[0]) {
+    case 'e':
+    case 'w':
+      printf("todo watchpoint!!!\n");
+      break;
+    default:
+      printf("invaild input !!!");
+    }
+  }
+
+  return 0;
+}
 
 static int cmd_help(char *args);
 
