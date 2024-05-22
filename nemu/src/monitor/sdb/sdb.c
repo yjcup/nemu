@@ -68,9 +68,11 @@ static int cmd_si(char *args) {
     uint64_t n = 0;
     int carry = 1;
     for (int i = len - 1; i >= 0; i--) {
-      uint8_t num_str = arg[i] & 0b1111;
-      printf("%u\n", num_str);
-      if (num_str >= 0 && num_str <= 9) {
+      // determine if char is legal
+      uint8_t num_str = arg[i] & 0xf;
+      uint8_t num_str_start = arg[i] & 0xf0;
+      if (num_str_start == 0x30 && num_str >= 0 && num_str <= 9) {
+        printf("%u\n", num_str);
         n += num_str * carry;
         carry *= 10;
       } else {
