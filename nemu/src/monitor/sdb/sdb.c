@@ -89,6 +89,7 @@ static int cmd_si(char *args) {
 static int cmd_info(char *args) {
   if (args == NULL) {
     printf("please input subcmd\n");
+    return 0;
   }
   char *arg = strtok(NULL, " ");
   if (strlen(arg) != 1) {
