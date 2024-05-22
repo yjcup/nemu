@@ -64,8 +64,17 @@ static int cmd_si(char *args) {
     cpu_exec(1);
   } else {
     printf("%s\n", arg);
-    uint64_t n = *(uint64_t *)arg;
-    printf("cpu_exec:%lu\n", n);
+    int len = strlen(arg);
+    uint64_t n = 0;
+    for (int i = 0; i < len; i++) {
+      uint8_t num_str = arg[i] & 0b11111;
+      if (num_str >= 0 && num_str <= 9) {
+        n += num_str * (len - i);
+        printf("%lu\n", n);
+      } else {
+        printf("invaild input!!!\n");
+      }
+    }
   }
   return 0;
 }
