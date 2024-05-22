@@ -96,7 +96,9 @@ static int cmd_info(char *args) {
     printf("length:invaild input!!!\n");
   } else {
     switch (arg[0]) {
-    case 'e':
+    case 'r':
+      isa_reg_display();
+      break;
     case 'w':
       printf("todo watchpoint!!!\n");
       break;
