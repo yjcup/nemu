@@ -63,6 +63,7 @@ static int cmd_si(char *args) {
   if (args == NULL) {
     cpu_exec(1);
   } else {
+    printf("%s\n", arg);
     uint64_t n = *(uint64_t *)arg;
     printf("cpu_exec:%lu\n", n);
   }
