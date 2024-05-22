@@ -85,6 +85,8 @@ static int cmd_si(char *args) {
   return 0;
 }
 
+static int cmd_info(char *args) { return 0; }
+
 static int cmd_help(char *args);
 
 static struct {
@@ -96,8 +98,7 @@ static struct {
     {"c", "Continue the execution of the program", cmd_c},
     {"q", "Exit NEMU", cmd_q},
     {"si", "step", cmd_si},
-    {"info", "print regs or point info", cmd_si},
-    {"info", "print regs or point info", cmd_si},
+    {"info", "print regs or point info", cmd_info},
 
     /* TODO: Add more commands */
 
