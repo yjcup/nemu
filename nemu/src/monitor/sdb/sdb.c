@@ -71,11 +71,11 @@ static int cmd_si(char *args) {
       printf("%u\n", num_str);
       if (num_str >= 0 && num_str <= 9) {
         n += num_str * (len - i);
-        printf("%lu\n", n);
       } else {
         printf("invaild input!!!\n");
       }
     }
+    printf("%lu\n", n);
   }
   return 0;
 }
