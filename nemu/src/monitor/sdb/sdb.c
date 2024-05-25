@@ -249,10 +249,13 @@ static int cmd_x(char *args) {
   // parse args
   if (args == NULL) {
     printf("please input subcmd\n");
-		return 0;
+    return 0;
   }
   char *arg = strtok(NULL, " ");
+  char *exper = strtok(NULL, " ");
   printf("%s\n", arg);
+  printf("%s\n", exper);
+
   /*initreg(args);*/
   /*genToken(args);*/
 
