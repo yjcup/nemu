@@ -46,17 +46,17 @@ static struct rule {
      * Pay attention to the precedence level of different rules.
      */
 
-    {" +", TK_NOTYPE},        // spaces
-    {"\\+", TK_PLUS},         // plus
-    {"==", TK_EQ},            // equal
-    {"-", TK_SUB},            // sub
-    {"\\*", TK_MULTI},        // equal
-    {"\\", TK_DIV},           // div
-    {"\\(", TK_BRACKET_LEFT},   // bracket
-    {"\\)", TK_BRACKET_RIGHT},  // bracket
-    {"\\b[0-9]+\\b", TK_INT}, // int
-    {"0x[0-9a-z]+", TK_HEX},  // hex
-    {"\\$[0-9a-z]+", TK_REG}, // regs
+    {" +", TK_NOTYPE},         // spaces
+    {"\\+", TK_PLUS},          // plus
+    {"==", TK_EQ},             // equal
+    {"-", TK_SUB},             // sub
+    {"\\*", TK_MULTI},         // equal
+    {"\\\\", TK_DIV},          // div
+    {"\\(", TK_BRACKET_LEFT},  // bracket
+    {"\\)", TK_BRACKET_RIGHT}, // bracket
+    {"\\b[0-9]+\\b", TK_INT},  // int
+    {"0x[0-9a-z]+", TK_HEX},   // hex
+    {"\\$[0-9a-z]+", TK_REG},  // regs
 };
 
 #define NR_REGEX ARRLEN(rules)
@@ -74,7 +74,7 @@ void init_regex() {
   for (i = 0; i < NR_REGEX; i++) {
     ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);
     if (ret != 0) {
-			printf("%d\n",i);
+      printf("%d\n", i);
       regerror(ret, &re[i], error_msg, 128);
       panic("regex compilation failed: %s\n%s", error_msg, rules[i].regex);
     }
