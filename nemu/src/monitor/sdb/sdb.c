@@ -252,7 +252,7 @@ static int cmd_x(char *args) {
     return 0;
   }
   char *arg = strtok(NULL, " ");
-  char *exper = strtok(NULL, " ");
+  char *exper = arg + strlen(arg) + 1;
   printf("%s\n", arg);
   printf("%s\n", exper);
 
