@@ -267,7 +267,7 @@ static struct {
     {"q", "Exit NEMU", cmd_q},
     {"si", "step", cmd_si},
     {"info", "print regs or point info", cmd_info},
-    {"x N expr", "displya memary", cmd_x},
+    {"x", "displya memary", cmd_x},
 
     /* TODO: Add more commands */
 
