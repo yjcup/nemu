@@ -52,9 +52,8 @@ static struct rule {
     {"-", TK_SUB},            // sub
     {"\\*", TK_MULTI},        // equal
     {"\\", TK_DIV},           // div
-    {"(", TK_BRACKET_LEFT},   // bracket
-    {")", TK_BRACKET_RIGHT},  // bracket
-    {")", TK_BRACKET_RIGHT},  // bracket
+    {"\\(", TK_BRACKET_LEFT},   // bracket
+    {"\\)", TK_BRACKET_RIGHT},  // bracket
     {"\\b[0-9]+\\b", TK_INT}, // int
     {"0x[0-9a-z]+", TK_HEX},  // hex
     {"\\$[0-9a-z]+", TK_REG}, // regs
