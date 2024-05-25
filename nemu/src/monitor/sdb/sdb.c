@@ -27,12 +27,12 @@ static int is_batch_mode = false;
 
 void init_regex();
 void init_wp_pool();
-typedef struct token {
-  int type;
-  char str[32];
-} Token;
-static Token token[100];
-static int flag = 0;
+/*typedef struct token {*/
+/*  int type;*/
+/*  char str[32];*/
+/*} Token;*/
+/*static Token token[100];*/
+/*static int flag = 0;*/
 
 /*static uint32_t char2num(char *c) {*/
 /*  uint32_t res = 0;*/
@@ -70,98 +70,100 @@ static int flag = 0;
 /*  }*/
 /*}*/
 // int hex reg constant  + - * - () space
-static char signarr[] = {'+', '-', '*', '/', '(', ')'};
+/*static char signarr[] = {'+', '-', '*', '/', '(', ')'};*/
+/**/
+/*static char *pattern_arr[] = {"\\b[0-9]+\\b", "0x[0-9a-z]+",
+ * "\\$[0-9a-z]+"};*/
+/*static char *reg_text_p = NULL;*/
+/*static int reg_match_len = 0;*/
+/*static regmatch_t p_match[1];*/
+/*static void update_regex(char *text);*/
+/*static const int regex_len = sizeof(pattern_arr) / 8;*/
+/*static char regex_error_message[100];*/
+/*static regex_t regex_arr[sizeof(pattern_arr) / 8];*/
 
-static char *pattern_arr[] = {"\\b[0-9]+\\b", "0x[0-9a-z]+", "\\$[0-9a-z]+"};
-static char *reg_text_p = NULL;
-static int reg_match_len = 0;
-static regmatch_t p_match[1];
-static void update_regex(char *text);
-static const int regex_len = sizeof(pattern_arr) / 8;
-static char regex_error_message[100];
-static regex_t regex_arr[sizeof(pattern_arr) / 8];
-
-static void initreg(char *text) {
-  reg_text_p = text;
-  printf("%d\n", regex_len);
-  for (int i = 0; i < regex_len; i++) {
-    int regexinit = regcomp(&regex_arr[i], pattern_arr[i], REG_EXTENDED);
-    if (regexinit) {
-      printf("regex init failed\n");
-      regerror(regexinit, &regex_arr[i], regex_error_message,
-               sizeof(regex_error_message));
-      printf("%s\n", regex_error_message);
-      return;
-    }
-  }
-  update_regex(text);
-}
-static void update_regex(char *text) {
-  for (int i = 0; i < regex_len; i++) {
-    // attention:p_match offset
-    if (regexec(&regex_arr[i], text, 1, p_match, 0) == 0) {
-      char *new_p = text + p_match[0].rm_so;
-      int len = p_match[0].rm_eo - p_match[0].rm_so;
-      if (i == 0) {
-        reg_text_p = new_p;
-        reg_match_len = len;
-      }
-      if (new_p <= reg_text_p) {
-        reg_text_p = new_p;
-        reg_match_len = len;
-      }
-    }
-  }
-}
-
+/*static void initreg(char *text) {*/
+/*  reg_text_p = text;*/
+/*  printf("%d\n", regex_len);*/
+/*  for (int i = 0; i < regex_len; i++) {*/
+/*    int regexinit = regcomp(&regex_arr[i], pattern_arr[i], REG_EXTENDED);*/
+/*    if (regexinit) {*/
+/*      printf("regex init failed\n");*/
+/*      regerror(regexinit, &regex_arr[i], regex_error_message,*/
+/*               sizeof(regex_error_message));*/
+/*      printf("%s\n", regex_error_message);*/
+/*      return;*/
+/*    }*/
+/*  }*/
+/*  update_regex(text);*/
+/*}*/
+/*static void update_regex(char *text) {*/
+/*  for (int i = 0; i < regex_len; i++) {*/
+/*    // attention:p_match offset*/
+/*    if (regexec(&regex_arr[i], text, 1, p_match, 0) == 0) {*/
+/*      char *new_p = text + p_match[0].rm_so;*/
+/*      int len = p_match[0].rm_eo - p_match[0].rm_so;*/
+/*      if (i == 0) {*/
+/*        reg_text_p = new_p;*/
+/*        reg_match_len = len;*/
+/*      }*/
+/*      if (new_p <= reg_text_p) {*/
+/*        reg_text_p = new_p;*/
+/*        reg_match_len = len;*/
+/*      }*/
+/*    }*/
+/*  }*/
+/*}*/
+/**/
 // 1. regexec
-static void genToken(char *text) {
-  int len = strlen(text);
-  char *p = text;
-  char loop_mark = 0;
-  for (int i = 0; i < len; i++) {
-    loop_mark = 0;
-    if (reg_text_p == (p + i)) {
-      //
-      token[flag].type = 0;
-      char match[reg_match_len + 1];
-      strncpy(match, p + i, reg_match_len);
-      match[reg_match_len] = '\0';
-      strcpy(token[flag].str, match);
-
-      flag++;
-      /*p += reg_match_len;*/
-      i = i + reg_match_len - 1;
-      update_regex(reg_text_p + reg_match_len);
-      // 这里的i也要边
-      continue;
-    }
-    if (p[i] == ' ')
-      continue;
-    for (int j = 0; j < strlen(signarr); j++) {
-      if (signarr[j] == p[i]) {
-        // mark
-        token[flag].type = j + 1;
-        token[flag].str[0] = p[i];
-        loop_mark = 1;
-        flag++;
-        break;
-      }
-    }
-    if (!loop_mark) {
-      printf("invaild expression!!!\n");
-      return;
-    }
-  }
-  return;
-}
+/*static void genToken(char *text) {*/
+/*  int len = strlen(text);*/
+/*  char *p = text;*/
+/*  char loop_mark = 0;*/
+/*  for (int i = 0; i < len; i++) {*/
+/*    loop_mark = 0;*/
+/*    if (reg_text_p == (p + i)) {*/
+//
+/*      token[flag].type = 0;*/
+/*      char match[reg_match_len + 1];*/
+/*      strncpy(match, p + i, reg_match_len);*/
+/*      match[reg_match_len] = '\0';*/
+/*      strcpy(token[flag].str, match);*/
+/**/
+/*      flag++;*/
+/*      p += reg_match_len;*/
+/*      i = i + reg_match_len - 1;*/
+/*      update_regex(reg_text_p + reg_match_len);*/
+/*      // 这里的i也要边*/
+/*      continue;*/
+/*    }*/
+/*    if (p[i] == ' ')*/
+/*      continue;*/
+/*    for (int j = 0; j < strlen(signarr); j++) {*/
+/*      if (signarr[j] == p[i]) {*/
+/*        // mark*/
+/*        token[flag].type = j + 1;*/
+/*        token[flag].str[0] = p[i];*/
+/*        loop_mark = 1;*/
+/*        flag++;*/
+/*        break;*/
+/*      }*/
+/*    }*/
+/*    if (!loop_mark) {*/
+/*      printf("invaild expression!!!\n");*/
+/*      return;*/
+/*    }*/
+/*  }*/
+/*  return;*/
+/*}*/
 
 /*int init(char *text) { return 0; }*/
 // \$[0-9a-z]+
 // 0x[0-9a-z]+
 // [0-9]+
 
-/* We use the `readline' library to provide more flexibility to read from stdin.
+/* We use the `readline' library to provide more flexibility to read from
+ * stdin.
  */
 static char *rl_gets() {
   static char *line_read = NULL;
@@ -245,8 +247,11 @@ static int cmd_info(char *args) {
 }
 static int cmd_x(char *args) {
   // parse args
-  initreg(args);
-  genToken(args);
+  char *arg = strtok(NULL, " ");
+  printf("%s\n", arg);
+  /*initreg(args);*/
+  /*genToken(args);*/
+
   return 0;
 }
 
