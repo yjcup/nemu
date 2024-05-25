@@ -74,6 +74,7 @@ void init_regex() {
   for (i = 0; i < NR_REGEX; i++) {
     ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);
     if (ret != 0) {
+			printf("%d\n",i);
       regerror(ret, &re[i], error_msg, 128);
       panic("regex compilation failed: %s\n%s", error_msg, rules[i].regex);
     }
