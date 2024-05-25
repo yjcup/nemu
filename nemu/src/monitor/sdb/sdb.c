@@ -247,6 +247,9 @@ static int cmd_info(char *args) {
 }
 static int cmd_x(char *args) {
   // parse args
+  if (args == NULL) {
+    printf("please input subcmd\n");
+  }
   char *arg = strtok(NULL, " ");
   printf("%s\n", arg);
   /*initreg(args);*/
