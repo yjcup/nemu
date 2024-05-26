@@ -178,55 +178,102 @@ static void copystr(Token *token, char *substr_start, int substr_len) {
   strcpy(token->str, match);
 }
 
-bool check_parentheses(int p, int q) { return true; }
+static word_t str2num(char *text, int carry, bool *success) {
+  word_t res = 0;
+  int base = 1;
+  int len = strlen(text);
+  for (int i = len - 1; i >= 0; i--) {
+    res += (text[i] & 0x0f) * base;
+    base = base * carry;
+  }
+  return res;
+}
 
-int find_main_position(int p, int q) {
+static word_t getTokenValue(Token *token, bool *success) {
+  switch (token->type) {
+  case TK_INT:
+    return str2num(token->str, 10, success);
+  case TK_HEX:
+    return str2num(token->str, 16, success);
+  case TK_REG:
+    return isa_reg_str2val(token->str, success);
+  }
+  return 0;
+}
+
+bool check_parentheses(int p, int q) {
+  int flag_bracket = 0;
+  if (tokens[p].type != TK_BRACKET_LEFT) {
+    return false;
+  }
+  if (tokens[q].type != TK_BRACKET_RIGHT) {
+    return false;
+  }
+  for (int i = p; i <= q; i++) {
+    if (tokens[i].type == TK_BRACKET_LEFT)
+      flag_bracket++;
+    if (tokens[i].type == TK_BRACKET_RIGHT)
+      flag_bracket--;
+  }
+  if (flag_bracket == 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+int find_main_position(int p, int q, bool *success) {
   // 如果是非括号的+ - 就可以直接认定为主运算符(buxing 最后的才行)
   // 如果遇到左括号就一直接加知道和右括号匹配
   // mark left bracket
-	int op = p;
+  int op = p;
   int flag_bracket = 0;
-	for(int i =p;i<=q;i++){
-    if (tokens[p].type >= 262 && tokens[p].type <= 265)continue;
+  for (int i = p; i <= q; i++) {
+    if (tokens[p].type >= 262 && tokens[p].type <= 265)
+      continue;
     if (tokens[p].type == TK_BRACKET_LEFT) {
       flag_bracket++;
     }
-		if(tokens[p].type==TK_BRACKET_RIGHT){
-			flag_bracket--;
-			if(flag_bracket<0){
-				printf("bad exper!!\n");
-				return 0;
-			}
-		}
-		if(tokens[p].type==TK_PLUS||tokens[p].type==TK_SUB){
-			if(flag_bracket==0){
-				op = p;
-			}
-		}
-		if(tokens[p].type==TK_MULTI||tokens[p].type==TK_DIV){
-			if(flag_bracket==0){
-				 if(!(tokens[op].type==TK_PLUS||tokens[op].type==TK_SUB)){
-						op = p;
-				 }
-			}	
-		}
+    if (tokens[p].type == TK_BRACKET_RIGHT) {
+      flag_bracket--;
+      if (flag_bracket < 0) {
+        printf("bad exper!!\n");
+        *success = false;
+        return 0;
+      }
+    }
+    if (tokens[p].type == TK_PLUS || tokens[p].type == TK_SUB) {
+      if (flag_bracket == 0) {
+        op = p;
+      }
+    }
+    if (tokens[p].type == TK_MULTI || tokens[p].type == TK_DIV) {
+      if (flag_bracket == 0) {
+        if (!(tokens[op].type == TK_PLUS || tokens[op].type == TK_SUB)) {
+          op = p;
+        }
+      }
+    }
   }
   return op;
 }
 
-word_t eval(int p, int q) {
+// 在递归是的异常处理
+word_t eval(int p, int q, bool *success) {
   if (p > q) {
     printf("bad expression!!\n");
+    *success = false;
+    return 0;
   } else if (p == q) {
     /*return tokens[q];*/
-    return 1;
+    return getTokenValue(&tokens[p], success);
   } else if (check_parentheses(p, q) == true) {
-    return eval(p + 1, q - 1);
+    return eval(p + 1, q - 1, success);
   } else {
     // 找主运算符的位置
     // 5*(123+123)*4
-    int op = find_main_position(p, q);
-		printf("%d\n",op);
+    int op = find_main_position(p, q, success);
+    printf("%d\n", op);
   }
   return 0;
 }
@@ -236,8 +283,6 @@ word_t expr(char *e, bool *success) {
     *success = false;
     return 0;
   }
-
   /* TODO: Insert codes to evaluate the expression. */
-
-  return 0;
+  return eval(0, nr_token, success);
 }
