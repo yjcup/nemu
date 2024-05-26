@@ -119,10 +119,10 @@ static int cmd_x(char *args) {
   char *exper = arg + strlen(arg) + 1;
   bool *success = NULL;
   word_t res = expr(exper, success);
-	printf("%u\n",res);
-	if(*success==false){
-		return -1;
-	}
+  printf("exper res:%u\n", res);
+  if (*success == false) {
+    return -1;
+  }
   return 0;
 }
 
