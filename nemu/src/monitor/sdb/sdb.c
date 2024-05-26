@@ -122,7 +122,6 @@ static int cmd_x(char *args) {
   printf("exper res:%u\n", res);
   if (success == false) {
     printf("invaild exper,please input again!!\n");
-
   }
   return 0;
 }
