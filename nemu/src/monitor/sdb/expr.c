@@ -227,6 +227,8 @@ int find_main_position(int p, int q, bool *success) {
   // 如果是非括号的+ - 就可以直接认定为主运算符(buxing 最后的才行)
   // 如果遇到左括号就一直接加知道和右括号匹配
   // mark left bracket
+  printf("%d\n", p);
+  printf("%d\n", q);
   int op = p;
   int flag_bracket = 0;
   for (int i = p; i <= q; i++) {
