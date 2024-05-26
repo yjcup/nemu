@@ -227,18 +227,16 @@ int find_main_position(int p, int q, bool *success) {
   // 如果是非括号的+ - 就可以直接认定为主运算符(buxing 最后的才行)
   // 如果遇到左括号就一直接加知道和右括号匹配
   // mark left bracket
-  printf("%d\n", p);
-  printf("%d\n", q);
   int op = p;
   int flag_bracket = 0;
   for (int i = p; i <= q; i++) {
-    if (tokens[p].type >= 262 && tokens[p].type <= 264)
+    if (tokens[i].type >= 262 && tokens[i].type <= 264)
       continue;
-    if (tokens[p].type == TK_BRACKET_LEFT) {
+    if (tokens[i].type == TK_BRACKET_LEFT) {
       flag_bracket++;
       continue;
     }
-    if (tokens[p].type == TK_BRACKET_RIGHT) {
+    if (tokens[i].type == TK_BRACKET_RIGHT) {
       flag_bracket--;
       if (flag_bracket < 0) {
         printf("bad exper!!\n");
@@ -247,17 +245,17 @@ int find_main_position(int p, int q, bool *success) {
       }
       continue;
     }
-    if (tokens[p].type == TK_PLUS || tokens[p].type == TK_SUB) {
+    if (tokens[i].type == TK_PLUS || tokens[i].type == TK_SUB) {
       if (flag_bracket == 0) {
-        printf("into tk plus:%d\n", p);
-        op = p;
+        printf("into tk plus:%d\n", i);
+        op = i;
       }
     }
-    if (tokens[p].type == TK_MULTI || tokens[p].type == TK_DIV) {
+    if (tokens[i].type == TK_MULTI || tokens[i].type == TK_DIV) {
       if (flag_bracket == 0) {
         if (!(tokens[op].type == TK_PLUS || tokens[op].type == TK_SUB)) {
-          printf("into tk mulit:%d\n", p);
-          op = p;
+          printf("into tk mulit:%d\n", i);
+          op = i;
         }
       }
     }
