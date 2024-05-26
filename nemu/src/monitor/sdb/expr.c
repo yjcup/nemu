@@ -230,10 +230,11 @@ int find_main_position(int p, int q, bool *success) {
   int op = p;
   int flag_bracket = 0;
   for (int i = p; i <= q; i++) {
-    if (tokens[p].type >= 262 && tokens[p].type <= 265)
+    if (tokens[p].type >= 262 && tokens[p].type <= 264)
       continue;
     if (tokens[p].type == TK_BRACKET_LEFT) {
       flag_bracket++;
+      continue;
     }
     if (tokens[p].type == TK_BRACKET_RIGHT) {
       flag_bracket--;
@@ -242,6 +243,7 @@ int find_main_position(int p, int q, bool *success) {
         *success = false;
         return 0;
       }
+      continue;
     }
     if (tokens[p].type == TK_PLUS || tokens[p].type == TK_SUB) {
       if (flag_bracket == 0) {
