@@ -137,7 +137,7 @@ static bool make_token(char *e) {
           break;
         case TK_HEX:
           tokens[nr_token].type = TK_HEX;
-          copystr(&tokens[nr_token], substr_start, substr_len);
+          copystr(&tokens[nr_token], substr_start + 2, substr_len - 2);
           break;
         case TK_INT:
           tokens[nr_token].type = TK_INT;
@@ -146,13 +146,13 @@ static bool make_token(char *e) {
         case TK_EQ:
           tokens[nr_token].type = TK_EQ;
           break;
-          copystr(&tokens[nr_token], substr_start, substr_len);
           // this 后面都会++，但是
         case TK_NOTYPE:
           nr_token--;
           break;
         case TK_REG:
           tokens[nr_token].type = TK_REG;
+          copystr(&tokens[nr_token], substr_start + 1, substr_len - 1);
           break;
         }
         nr_token++;
@@ -279,14 +279,18 @@ word_t eval(int p, int q, bool *success) {
     // 5*(123+123)*4
     int op = find_main_position(p, q, success);
     printf("main_postion:%d\n", op);
-		int val1 = eval(p,op-1,success);
-		int val2 = eval(op+1,q,success);
-		switch(tokens[op].type){
-			case TK_PLUS:return val1+val2;
-			case TK_SUB:return val1-val2;
-			case TK_MULTI:return val1*val2;
-			case TK_DIV:return val1/val2;
-		}
+    int val1 = eval(p, op - 1, success);
+    int val2 = eval(op + 1, q, success);
+    switch (tokens[op].type) {
+    case TK_PLUS:
+      return val1 + val2;
+    case TK_SUB:
+      return val1 - val2;
+    case TK_MULTI:
+      return val1 * val2;
+    case TK_DIV:
+      return val1 - val2;
+    }
   }
   return 0;
 }
