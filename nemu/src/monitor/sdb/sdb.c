@@ -14,6 +14,7 @@
  ***************************************************************************************/
 
 #include "sdb.h"
+#include "common.h"
 #include "utils.h"
 #include <cpu/cpu.h>
 #include <isa.h>
@@ -117,7 +118,11 @@ static int cmd_x(char *args) {
   char *arg = strtok(NULL, " ");
   char *exper = arg + strlen(arg) + 1;
   bool *success = NULL;
-  expr(exper, success);
+  word_t res = expr(exper, success);
+	printf("%u\n",res);
+	if(*success==false){
+		return -1;
+	}
   return 0;
 }
 
