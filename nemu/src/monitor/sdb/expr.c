@@ -273,7 +273,7 @@ word_t eval(int p, int q, bool *success) {
     // 找主运算符的位置
     // 5*(123+123)*4
     int op = find_main_position(p, q, success);
-    printf("%d\n", op);
+    printf("main_postion:%d\n", op);
   }
   return 0;
 }
