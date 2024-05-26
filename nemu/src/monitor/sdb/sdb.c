@@ -28,7 +28,6 @@ static int is_batch_mode = false;
 void init_regex();
 void init_wp_pool();
 
-
 static char *rl_gets() {
   static char *line_read = NULL;
 
@@ -117,8 +116,8 @@ static int cmd_x(char *args) {
   }
   char *arg = strtok(NULL, " ");
   char *exper = arg + strlen(arg) + 1;
-	bool *success = NULL;
-	expr(exper,success);
+  bool *success = NULL;
+  expr(exper, success);
   return 0;
 }
 

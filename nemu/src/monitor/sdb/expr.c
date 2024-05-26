@@ -24,15 +24,15 @@
 enum {
   TK_NOTYPE = 256,
   TK_EQ,
-  TK_PLUS,
-  TK_SUB,
-  TK_MULTI,
-  TK_DIV,
+  TK_PLUS,  // 258
+  TK_SUB,   // 259
+  TK_MULTI, // 260
+  TK_DIV,   // 261
   TK_HEX,
   TK_INT,
+  TK_REG,
   TK_BRACKET_LEFT,
-  TK_BRACKET_RIGHT,
-  TK_REG
+  TK_BRACKET_RIGHT
   /* TODO: Add more token types */
 
 };
@@ -178,6 +178,59 @@ static void copystr(Token *token, char *substr_start, int substr_len) {
   strcpy(token->str, match);
 }
 
+bool check_parentheses(int p, int q) { return true; }
+
+int find_main_position(int p, int q) {
+  // 如果是非括号的+ - 就可以直接认定为主运算符(buxing 最后的才行)
+  // 如果遇到左括号就一直接加知道和右括号匹配
+  // mark left bracket
+	int op = p;
+  int flag_bracket = 0;
+	for(int i =p;i<=q;i++){
+    if (tokens[p].type >= 262 && tokens[p].type <= 265)continue;
+    if (tokens[p].type == TK_BRACKET_LEFT) {
+      flag_bracket++;
+    }
+		if(tokens[p].type==TK_BRACKET_RIGHT){
+			flag_bracket--;
+			if(flag_bracket<0){
+				printf("bad exper!!\n");
+				return 0;
+			}
+		}
+		if(tokens[p].type==TK_PLUS||tokens[p].type==TK_SUB){
+			if(flag_bracket==0){
+				op = p;
+			}
+		}
+		if(tokens[p].type==TK_MULTI||tokens[p].type==TK_DIV){
+			if(flag_bracket==0){
+				 if(!(tokens[op].type==TK_PLUS||tokens[op].type==TK_SUB)){
+						op = p;
+				 }
+			}	
+		}
+  }
+  return op;
+}
+
+word_t eval(int p, int q) {
+  if (p > q) {
+    printf("bad expression!!\n");
+  } else if (p == q) {
+    /*return tokens[q];*/
+    return 1;
+  } else if (check_parentheses(p, q) == true) {
+    return eval(p + 1, q - 1);
+  } else {
+    // 找主运算符的位置
+    // 5*(123+123)*4
+    int op = find_main_position(p, q);
+		printf("%d\n",op);
+  }
+  return 0;
+}
+
 word_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
@@ -185,7 +238,6 @@ word_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  TODO();
 
   return 0;
 }
