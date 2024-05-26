@@ -120,7 +120,7 @@ static int cmd_x(char *args) {
   /*printf("arg exper:%s\n", exper);*/
   bool success = true;
   word_t res = expr(exper, &success);
-  printf("exper res:%u\n", res);
+  printf("exper res:%#x\n", res);
   if (success == false) {
     printf("invaild exper,please input again!!\n");
   }
