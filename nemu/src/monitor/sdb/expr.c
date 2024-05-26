@@ -184,7 +184,7 @@ static word_t str2num(char *text, int carry, bool *success) {
   int base = 1;
   int len = strlen(text);
   for (int i = len - 1; i >= 0; i--) {
-    if (text[i] * 0xf0 == 0x30) {
+    if ((text[i] & 0xf0) == 0x30) {
       res += (text[i] & 0x0f) * base;
       base = base * carry;
     } else {
