@@ -252,14 +252,14 @@ int find_main_position(int p, int q, bool *success) {
     }
     if (tokens[i].type == TK_PLUS || tokens[i].type == TK_SUB) {
       if (flag_bracket == 0) {
-        printf("into tk plus:%d\n", i);
+        /*printf("into tk plus:%d\n", i);*/
         op = i;
       }
     }
     if (tokens[i].type == TK_MULTI || tokens[i].type == TK_DIV) {
       if (flag_bracket == 0) {
         if (!(tokens[op].type == TK_PLUS || tokens[op].type == TK_SUB)) {
-          printf("into tk mulit:%d\n", i);
+          /*printf("into tk mulit:%d\n", i);*/
           op = i;
         }
       }
