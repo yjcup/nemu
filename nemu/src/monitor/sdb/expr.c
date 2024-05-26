@@ -189,6 +189,7 @@ static word_t str2num(char *text, int carry, bool *success) {
       base = base * carry;
     } else {
       res += ((text[i] & 0x0f) + 9) * base;
+      base = base * carry;
     }
   }
   return res;
