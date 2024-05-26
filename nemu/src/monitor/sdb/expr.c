@@ -165,9 +165,9 @@ static bool make_token(char *e) {
       return false;
     }
   }
-  for (int j = 0; j < nr_token; j++) {
-    printf("%d---str:%s\n", tokens[j].type, tokens[j].str);
-  }
+  /*for (int j = 0; j < nr_token; j++) {*/
+  /*  printf("%d---str:%s\n", tokens[j].type, tokens[j].str);*/
+  /*}*/
   printf("tokens len:%d\n", nr_token);
   return true;
 }
