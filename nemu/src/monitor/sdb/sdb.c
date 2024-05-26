@@ -121,7 +121,8 @@ static int cmd_x(char *args) {
   word_t res = expr(exper, &success);
   printf("exper res:%u\n", res);
   if (success == false) {
-    return -1;
+    printf("invaild exper,please input again!!\n");
+
   }
   return 0;
 }

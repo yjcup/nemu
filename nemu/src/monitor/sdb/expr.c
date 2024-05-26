@@ -87,6 +87,7 @@ typedef struct token {
 } Token;
 
 static Token tokens[32] __attribute__((used)) = {};
+// token len
 static int nr_token __attribute__((used)) = 0;
 static void copystr(Token *token, char *substr_start, int substr_len);
 
@@ -164,7 +165,7 @@ static bool make_token(char *e) {
       return false;
     }
   }
-  for (int j = 0; j <= nr_token; j++) {
+  for (int j = 0; j < nr_token; j++) {
     printf("%d---str:%s\n", tokens[j].type, tokens[j].str);
   }
   printf("printf tokens test\n");
