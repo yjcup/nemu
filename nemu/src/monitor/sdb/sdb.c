@@ -117,7 +117,7 @@ static int cmd_x(char *args) {
   }
   char *arg = strtok(NULL, " ");
   char *exper = arg + strlen(arg) + 1;
-  printf("arg exper:%s\n", exper);
+  /*printf("arg exper:%s\n", exper);*/
   bool success = true;
   word_t res = expr(exper, &success);
   printf("exper res:%u\n", res);
