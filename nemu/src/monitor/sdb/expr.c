@@ -47,10 +47,10 @@ static struct rule {
      * Pay attention to the precedence level of different rules.
      */
 
+    {" -[0-9]+", TK_NEGA_INT}, // nega int
     {" +", TK_NOTYPE},         // spaces
     {"\\+", TK_PLUS},          // plus
     {"==", TK_EQ},             // equal
-    {" -[0-9]+", TK_NEGA_INT}, // sub
     {"-", TK_SUB},             // sub
     {"\\*", TK_MULTI},         // equal
     {"\\\\", TK_DIV},          // div
