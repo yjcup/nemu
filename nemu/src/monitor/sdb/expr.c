@@ -171,9 +171,9 @@ static bool make_token(char *e) {
       return false;
     }
   }
-  /*for (int j = 0; j < nr_token; j++) {*/
-  /*  printf("%d---str:%s\n", tokens[j].type, tokens[j].str);*/
-  /*}*/
+  for (int j = 0; j < nr_token; j++) {
+    printf("%d---str:%s\n", tokens[j].type, tokens[j].str);
+  }
   printf("tokens len:%d\n", nr_token);
   return true;
 }
@@ -206,7 +206,6 @@ static word_t getTokenValue(Token *token, bool *success) {
   case TK_INT:
     return str2num(token->str, 10, success);
   case TK_NEGA_INT: {
-
     word_t post_res = str2num(token->str + 2, 10, success);
     return (~post_res) + 1;
   }
@@ -313,6 +312,7 @@ word_t eval(int p, int q, bool *success) {
 
 word_t expr(char *e, bool *success) {
   if (!make_token(e)) {
+    printf("make invaild tokens!!");
     *success = false;
     return 0;
   }
