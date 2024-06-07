@@ -130,7 +130,7 @@ static bool make_token(char *e) {
           tokens[nr_token].type = TK_MULTI;
           break;
         case TK_DIV:
-          tokens[nr_token].type = TK_SUB;
+          tokens[nr_token].type = TK_DIV;
           break;
         case TK_BRACKET_LEFT:
           tokens[nr_token].type = TK_BRACKET_LEFT;
