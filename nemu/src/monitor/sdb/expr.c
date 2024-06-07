@@ -53,7 +53,7 @@ static struct rule {
     {"==", TK_EQ},             // equal
     {"-", TK_SUB},             // sub
     {"\\*", TK_MULTI},         // equal
-    {"\\\\", TK_DIV},          // div
+    {"\\/", TK_DIV},           // div
     {"\\(", TK_BRACKET_LEFT},  // bracket
     {"\\)", TK_BRACKET_RIGHT}, // bracket
     {"\\b[0-9]+\\b", TK_INT},  // int
