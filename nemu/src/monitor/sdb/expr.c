@@ -312,6 +312,7 @@ word_t eval(int p, int q, bool *success) {
 }
 
 word_t expr(char *e, bool *success) {
+  printf("make tokens:%s\n", e);
   if (!make_token(e)) {
     printf("make invaild tokens!!");
     *success = false;
