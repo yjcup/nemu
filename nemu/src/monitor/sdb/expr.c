@@ -305,7 +305,7 @@ word_t eval(int p, int q, bool *success) {
     case TK_MULTI:
       return val1 * val2;
     case TK_DIV:
-      return val1 - val2;
+      return val1 / val2;
     }
   }
   return 0;
