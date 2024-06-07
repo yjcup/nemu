@@ -48,7 +48,7 @@ static struct rule {
      */
 
     {" -[0-9]+", TK_NEGA_INT}, // nega int
-    {" +", TK_NOTYPE},         // spaces
+    {" ", TK_NOTYPE},          // spaces
     {"\\+", TK_PLUS},          // plus
     {"==", TK_EQ},             // equal
     {"-", TK_SUB},             // sub
