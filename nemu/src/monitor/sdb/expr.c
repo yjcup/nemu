@@ -32,7 +32,7 @@ enum {
   TK_INT,
   TK_REG,
   TK_BRACKET_LEFT,
-  TK_BRACKET_RIGHT
+  TK_BRACKET_RIGHT,
   /* TODO: Add more token types */
 
 };
@@ -49,6 +49,7 @@ static struct rule {
     {" +", TK_NOTYPE},         // spaces
     {"\\+", TK_PLUS},          // plus
     {"==", TK_EQ},             // equal
+    {" -[0-9]+", TK_INT},      // sub
     {"-", TK_SUB},             // sub
     {"\\*", TK_MULTI},         // equal
     {"\\\\", TK_DIV},          // div
