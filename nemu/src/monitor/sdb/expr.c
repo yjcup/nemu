@@ -30,6 +30,7 @@ enum {
   TK_DIV,   // 261
   TK_HEX,
   TK_INT,
+  TK_NEGA_INT,
   TK_REG,
   TK_BRACKET_LEFT,
   TK_BRACKET_RIGHT,
@@ -49,7 +50,7 @@ static struct rule {
     {" +", TK_NOTYPE},         // spaces
     {"\\+", TK_PLUS},          // plus
     {"==", TK_EQ},             // equal
-    {" -[0-9]+", TK_INT},      // sub
+    {" -[0-9]+", TK_NEGA_INT}, // sub
     {"-", TK_SUB},             // sub
     {"\\*", TK_MULTI},         // equal
     {"\\\\", TK_DIV},          // div
@@ -144,6 +145,10 @@ static bool make_token(char *e) {
           tokens[nr_token].type = TK_INT;
           copystr(&tokens[nr_token], substr_start, substr_len);
           break;
+        case TK_NEGA_INT:
+          tokens[nr_token].type = TK_NEGA_INT;
+          copystr(&tokens[nr_token], substr_start, substr_len);
+          break;
         case TK_EQ:
           tokens[nr_token].type = TK_EQ;
           break;
@@ -200,6 +205,11 @@ static word_t getTokenValue(Token *token, bool *success) {
   switch (token->type) {
   case TK_INT:
     return str2num(token->str, 10, success);
+  case TK_NEGA_INT: {
+
+    word_t post_res = str2num(token->str + 2, 10, success);
+    return (~post_res) + 1;
+  }
   case TK_HEX:
     return str2num(token->str, 16, success);
   case TK_REG:
