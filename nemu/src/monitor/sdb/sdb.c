@@ -138,8 +138,11 @@ static struct {
     {"c", "Continue the execution of the program", cmd_c},
     {"q", "Exit NEMU", cmd_q},
     {"si", "step", cmd_si},
-    {"info", "print regs or point info", cmd_info},
-    {"x", "displya memary", cmd_x},
+    {"info", "print regs or point info(r,w)", cmd_info},
+    {"x", "displya memary x N expr", cmd_x},
+    {"p", "p expr", cmd_x},
+    {"w", "w expr", cmd_x},
+    {"d", "w N", cmd_x},
 
     /* TODO: Add more commands */
 
