@@ -275,8 +275,6 @@ int find_main_position(int p, int q, bool *success) {
         *success = false;
         return 0;
       }
-      if (flag_bracket == 0)
-        return i;
       continue;
     }
     if (tokens[i].type == TK_PLUS || tokens[i].type == TK_SUB) {
