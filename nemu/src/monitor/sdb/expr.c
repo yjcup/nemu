@@ -260,7 +260,7 @@ int find_main_position(int p, int q, bool *success) {
   for (int i = p; i <= q; i++) {
     /*if (tokens[i].type >= 262 && tokens[i].type <= 264)*/
     // if no 运算符 continue
-    printf("%s---->%d", tokens[i].str, tokens[i].type);
+    printf("%s---->%d\n", tokens[i].str, tokens[i].type);
     if (tokens[i].type == TK_INT || tokens[i].type == TK_REG ||
         tokens[i].type == TK_HEX || tokens[i].type == TK_DEF ||
         tokens[i].type == TK_NEGA)
