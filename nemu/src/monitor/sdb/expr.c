@@ -306,7 +306,7 @@ int find_main_position(int p, int q, bool *success) {
     if (tokens[i].type == TK_MULTI || tokens[i].type == TK_DIV) {
       if (flag_bracket == 0) {
         if (!(tokens[op].type == TK_PLUS || tokens[op].type == TK_SUB)) {
-          /*printf("into tk mulit:%d\n", i);*/
+          printf("main positon:%d\n", op);
           op = i;
         }
       }
