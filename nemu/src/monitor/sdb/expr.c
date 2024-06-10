@@ -354,6 +354,6 @@ word_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  return 0;
-  /*return eval(0, nr_token - 1, success);*/
+  /*return 0;*/
+  return eval(0, nr_token - 1, success);
 }
