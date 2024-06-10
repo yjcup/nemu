@@ -298,8 +298,8 @@ int find_main_position(int p, int q, bool *success) {
 // 在递归是的异常处理
 word_t eval(int p, int q, bool *success) {
   if (p > q) {
-    assert(p > q);
     printf("P>Q:bad expression!!\n");
+    assert(p <= q);
     *success = false;
     return 0;
   } else if ((p == q) || ((q - p == 1) && (tokens[p].type == TK_DEF ||
