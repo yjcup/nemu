@@ -161,10 +161,10 @@ static bool make_token(char *e) {
           tokens[nr_token].type = TK_INT;
           copystr(&tokens[nr_token], substr_start, substr_len);
           break;
-        case TK_NEGA_INT:
-          tokens[nr_token].type = TK_NEGA_INT;
-          copystr(&tokens[nr_token], substr_start, substr_len);
-          break;
+          /*case TK_NEGA_INT:*/
+          /*  tokens[nr_token].type = TK_NEGA_INT;*/
+          /*  copystr(&tokens[nr_token], substr_start, substr_len);*/
+          /*  break;*/
           // this 后面都会++，但是
         case TK_NOTYPE:
           nr_token--;
