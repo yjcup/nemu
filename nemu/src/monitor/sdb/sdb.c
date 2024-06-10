@@ -132,8 +132,12 @@ static int cmd_p(char *args) {
     printf("please input subcmd\n");
     return 0;
   }
-  /*char *arg = strtok(NULL, " ");*/
-  printf("%s\n", args);
+  bool success = true;
+  word_t res = expr(args, &success);
+  if (!success) {
+    printf("invalid exper cmd_p\n");
+  }
+  printf("exper res:%#x\n", res);
   return 0;
 }
 
