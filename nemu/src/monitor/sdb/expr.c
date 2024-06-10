@@ -184,10 +184,6 @@ static bool make_token(char *e) {
       return false;
     }
   }
-  for (int j = 0; j < nr_token; j++) {
-    printf("%d---str:%s\n", tokens[j].type, tokens[j].str);
-  }
-  printf("tokens len:%d\n", nr_token);
   return true;
 }
 
@@ -352,6 +348,10 @@ word_t expr(char *e, bool *success) {
       tokens[i].type = TK_NEGA;
     }
   }
+  for (int j = 0; j < nr_token; j++) {
+    printf("%d---str:%s\n", tokens[j].type, tokens[j].str);
+  }
+  printf("tokens len:%d\n", nr_token);
 
   /* TODO: Insert codes to evaluate the expression. */
   /*return 0;*/
