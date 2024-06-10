@@ -218,10 +218,14 @@ static word_t getTokenValue(Token *token, bool *success) {
   switch (token->type) {
   case TK_INT:
     return str2num(token->str, 10, success);
-  case TK_NEGA_INT: {
-    word_t post_res = str2num(token->str + 2, 10, success);
+  case TK_NEGA: {
+    /*word_t post_res = str2num(token->str + 2, 10, success);*/
+    /*return (~post_res) + 1;*/
+    word_t post_res = str2num((++token)->str, 10, success);
     return (~post_res) + 1;
-  }
+  };
+  case TK_DEF:
+    return getTokenValue(++token, success);
   case TK_HEX:
     return str2num(token->str, 16, success);
   case TK_REG:
@@ -258,7 +262,10 @@ int find_main_position(int p, int q, bool *success) {
   int op = p;
   int flag_bracket = 0;
   for (int i = p; i <= q; i++) {
-    if (tokens[i].type >= 262 && tokens[i].type <= 264)
+    /*if (tokens[i].type >= 262 && tokens[i].type <= 264)*/
+    if (tokens[i].type == TK_INT || tokens[i].type == TK_REG ||
+        tokens[i].type == TK_HEX || tokens[i].type == TK_DEF ||
+        tokens[i].type == TK_NEGA)
       continue;
     if (tokens[i].type == TK_BRACKET_LEFT) {
       flag_bracket++;
@@ -297,8 +304,11 @@ word_t eval(int p, int q, bool *success) {
     printf("bad expression!!\n");
     *success = false;
     return 0;
-  } else if (p == q) {
+  } else if ((p == q) || (q - p == 1 && (tokens[p].type == TK_DEF ||
+                                         tokens[p].type == TK_NEGA))) {
+
     /*return tokens[q];*/
+
     return getTokenValue(&tokens[p], success);
   } else if (check_parentheses(p, q) == true) {
     return eval(p + 1, q - 1, success);
@@ -330,6 +340,19 @@ word_t expr(char *e, bool *success) {
     *success = false;
     return 0;
   }
+
+  // remark type - *
+  for (int i = 0; i < nr_token; i++) {
+    if (tokens[i].type == TK_MULTI && (i == 0 || tokens[i - 1].type != TK_INT ||
+                                       tokens[i - 1].type != TK_HEX)) {
+      tokens[i].type = TK_DEF;
+    }
+    if (tokens[i].type == TK_SUB && (i == 0 || tokens[i - 1].type != TK_INT ||
+                                     tokens[i - 1].type != TK_HEX)) {
+      tokens[i].type = TK_NEGA;
+    }
+  }
+
   /* TODO: Insert codes to evaluate the expression. */
   return 0;
   /*return eval(0, nr_token - 1, success);*/
