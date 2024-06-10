@@ -301,8 +301,8 @@ word_t eval(int p, int q, bool *success) {
     printf("P>Q:bad expression!!\n");
     *success = false;
     return 0;
-  } else if ((p == q) || (q - p == 1 && (tokens[p].type == TK_DEF ||
-                                         tokens[p].type == TK_NEGA))) {
+  } else if ((p == q) || ((q - p == 1) && (tokens[p].type == TK_DEF ||
+                                           tokens[p].type == TK_NEGA))) {
 
     /*return tokens[q];*/
 
