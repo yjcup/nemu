@@ -127,6 +127,20 @@ static int cmd_x(char *args) {
   return 0;
 }
 
+static int cmd_p(char *args) {
+  if (args == NULL) {
+    printf("please input subcmd\n");
+    return 0;
+  }
+  char *arg = strtok(NULL, " ");
+  printf("%s\n", arg);
+  return 0;
+}
+
+static int cmd_del_w(char *args) { return 1; }
+
+static int cmd_add_w(char *args) { return 0; }
+
 static int cmd_help(char *args);
 
 static struct {
@@ -138,11 +152,11 @@ static struct {
     {"c", "Continue the execution of the program", cmd_c},
     {"q", "Exit NEMU", cmd_q},
     {"si", "step", cmd_si},
-    {"info", "print regs or point info(r,w)", cmd_info},
+    {"info subcmd", "print regs or point info(r,w)", cmd_info},
     {"x", "displya memary x N expr", cmd_x},
-    {"p", "p expr", cmd_x},
-    {"w", "w expr", cmd_x},
-    {"d", "w N", cmd_x},
+    {"p", "p expr", cmd_p},
+    {"w", "w expr", cmd_add_w},
+    {"d", "w N", cmd_del_w},
 
     /* TODO: Add more commands */
 
