@@ -274,7 +274,7 @@ int find_main_position(int p, int q, bool *success) {
     if (tokens[i].type == TK_BRACKET_RIGHT) {
       flag_bracket--;
       if (flag_bracket < 0) {
-        printf("bad exper!!\n");
+        printf("bracket:bad exper!!\n");
         *success = false;
         return 0;
       }
@@ -301,7 +301,7 @@ int find_main_position(int p, int q, bool *success) {
 // 在递归是的异常处理
 word_t eval(int p, int q, bool *success) {
   if (p > q) {
-    printf("bad expression!!\n");
+    printf("P>Q:bad expression!!\n");
     *success = false;
     return 0;
   } else if ((p == q) || (q - p == 1 && (tokens[p].type == TK_DEF ||
