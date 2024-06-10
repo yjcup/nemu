@@ -132,8 +132,8 @@ static int cmd_p(char *args) {
     printf("please input subcmd\n");
     return 0;
   }
-  char *arg = strtok(NULL, " ");
-  printf("%s\n", arg);
+  /*char *arg = strtok(NULL, " ");*/
+  printf("%s\n", args);
   return 0;
 }
 
