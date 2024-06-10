@@ -260,6 +260,7 @@ int find_main_position(int p, int q, bool *success) {
   for (int i = p; i <= q; i++) {
     /*if (tokens[i].type >= 262 && tokens[i].type <= 264)*/
     // if no 运算符 continue
+    printf("%s---->%d", tokens[i].str, tokens[i].type);
     if (tokens[i].type == TK_INT || tokens[i].type == TK_REG ||
         tokens[i].type == TK_HEX || tokens[i].type == TK_DEF ||
         tokens[i].type == TK_NEGA)
@@ -315,6 +316,9 @@ word_t eval(int p, int q, bool *success) {
     // 5*(123+123)*4
     int op = find_main_position(p, q, success);
     printf("main_postion:%d\n", op);
+    if (!(*success)) {
+      return 0;
+    }
     int val1 = eval(p, op - 1, success);
     int val2 = eval(op + 1, q, success);
     switch (tokens[op].type) {
