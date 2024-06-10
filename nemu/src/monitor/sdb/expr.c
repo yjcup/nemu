@@ -238,17 +238,36 @@ bool check_parentheses(int p, int q) {
   if (tokens[q].type != TK_BRACKET_RIGHT) {
     return false;
   }
+  // (1+2)+(3+3) no
+  // ((1+2)+(3+3)) yes
+  // 逻辑严重问题
   for (int i = p; i <= q; i++) {
-    if (tokens[i].type == TK_BRACKET_LEFT)
+    if (tokens[i].type == TK_BRACKET_LEFT) {
       flag_bracket++;
-    if (tokens[i].type == TK_BRACKET_RIGHT)
+    }
+    if (tokens[i].type == TK_BRACKET_RIGHT) {
       flag_bracket--;
+    }
+    if (flag_bracket == 0 && p != q) {
+      return false;
+    }
   }
   if (flag_bracket == 0) {
     return true;
   } else {
     return false;
   }
+  /*for (int i = p; i <= q; i++) {*/
+  /*  if (tokens[i].type == TK_BRACKET_LEFT)*/
+  /*    flag_bracket++;*/
+  /*  if (tokens[i].type == TK_BRACKET_RIGHT)*/
+  /*    flag_bracket--;*/
+  /*}*/
+  /*if (flag_bracket == 0) {*/
+  /*  return true;*/
+  /*} else {*/
+  /*  return false;*/
+  /*}*/
 }
 
 int find_main_position(int p, int q, bool *success) {
