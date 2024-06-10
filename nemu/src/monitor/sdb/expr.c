@@ -368,12 +368,16 @@ word_t expr(char *e, bool *success) {
   for (int i = 0; i < nr_token; i++) {
     if (tokens[i].type == TK_MULTI &&
         (i == 0 ||
-         (tokens[i - 1].type != TK_INT && tokens[i - 1].type != TK_HEX))) {
+         (tokens[i - 1].type != TK_INT && tokens[i - 1].type != TK_HEX &&
+          tokens[i - 1].type != TK_BRACKET_RIGHT &&
+          tokens[i - 1].type != TK_REG))) {
       tokens[i].type = TK_DEF;
     }
     if (tokens[i].type == TK_SUB &&
         (i == 0 ||
-         (tokens[i - 1].type != TK_INT && tokens[i - 1].type != TK_HEX))) {
+         (tokens[i - 1].type != TK_INT && tokens[i - 1].type != TK_HEX &&
+          tokens[i - 1].type != TK_BRACKET_RIGHT &&
+          tokens[i - 1].type != TK_REG))) {
       tokens[i].type = TK_NEGA;
     }
   }
