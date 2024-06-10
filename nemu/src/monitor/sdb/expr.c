@@ -298,6 +298,7 @@ int find_main_position(int p, int q, bool *success) {
 // 在递归是的异常处理
 word_t eval(int p, int q, bool *success) {
   if (p > q) {
+    assert(p > q);
     printf("P>Q:bad expression!!\n");
     *success = false;
     return 0;
@@ -357,6 +358,6 @@ word_t expr(char *e, bool *success) {
   printf("tokens len:%d\n", nr_token);
 
   /* TODO: Insert codes to evaluate the expression. */
-  return 0;
-  /*return eval(0, nr_token - 1, success);*/
+  /*return 0;*/
+  return eval(0, nr_token - 1, success);
 }
