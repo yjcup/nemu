@@ -111,7 +111,7 @@ static bool make_token(char *e) {
     for (i = 0; i < NR_REGEX; i++) {
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 &&
           pmatch.rm_so == 0) {
-        printf("%d\n", rules[i].token_type);
+        /*printf("%d\n", rules[i].token_type);*/
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
 
@@ -279,7 +279,7 @@ int find_main_position(int p, int q, bool *success) {
   for (int i = p; i <= q; i++) {
     /*if (tokens[i].type >= 262 && tokens[i].type <= 264)*/
     // if no 运算符 continue
-    printf("%s---->%d-->postion:%d\n", tokens[i].str, tokens[i].type, i);
+    /*printf("%s---->%d-->postion:%d\n", tokens[i].str, tokens[i].type, i);*/
     if (tokens[i].type == TK_INT || tokens[i].type == TK_REG ||
         tokens[i].type == TK_HEX || tokens[i].type == TK_DEF ||
         tokens[i].type == TK_NEGA)
@@ -319,7 +319,7 @@ int find_main_position(int p, int q, bool *success) {
 word_t eval(int p, int q, bool *success) {
   if (p > q) {
     printf("P>Q:bad expression!!\n");
-    assert(p <= q);
+    /*assert(p <= q);*/
     *success = false;
     return 0;
   } else if ((p == q) || ((q - p == 1) && (tokens[p].type == TK_DEF ||
@@ -329,14 +329,14 @@ word_t eval(int p, int q, bool *success) {
 
     return getTokenValue(&tokens[p], success);
   } else if (check_parentheses(p, q) == true) {
-    printf("input checkout ||\n");
+    /*printf("input checkout ||\n");*/
     return eval(p + 1, q - 1, success);
   } else {
     // 找主运算符的位置
     // 5*(123+123)*4
-    printf("%d:%d\n", p, q);
+    /*printf("%d:%d\n", p, q);*/
     int op = find_main_position(p, q, success);
-    printf("main_postion:%d\n", op);
+    /*printf("main_postion:%d\n", op);*/
     if (!(*success)) {
       return 0;
     }
