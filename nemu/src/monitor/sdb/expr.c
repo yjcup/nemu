@@ -144,6 +144,15 @@ static bool make_token(char *e) {
         case TK_BRACKET_RIGHT:
           tokens[nr_token].type = TK_BRACKET_RIGHT;
           break;
+        case TK_AND:
+          tokens[nr_token].type = TK_AND;
+          break;
+        case TK_EQ:
+          tokens[nr_token].type = TK_EQ;
+          break;
+        case TK_NOEQ:
+          tokens[nr_token].type = TK_NOEQ;
+          break;
         case TK_HEX:
           tokens[nr_token].type = TK_HEX;
           copystr(&tokens[nr_token], substr_start + 2, substr_len - 2);
@@ -155,9 +164,6 @@ static bool make_token(char *e) {
         case TK_NEGA_INT:
           tokens[nr_token].type = TK_NEGA_INT;
           copystr(&tokens[nr_token], substr_start, substr_len);
-          break;
-        case TK_EQ:
-          tokens[nr_token].type = TK_EQ;
           break;
           // this 后面都会++，但是
         case TK_NOTYPE:
