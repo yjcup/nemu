@@ -34,6 +34,10 @@ enum {
   TK_REG,
   TK_BRACKET_LEFT,
   TK_BRACKET_RIGHT,
+  TK_DEF,
+  TK_NOEQ,
+  TK_AND,
+  TK_NEGA
   /* TODO: Add more token types */
 
 };
@@ -47,11 +51,13 @@ static struct rule {
      * Pay attention to the precedence level of different rules.
      */
 
-    {" -[0-9]+", TK_NEGA_INT}, // nega int
+    /*{" -[0-9]+", TK_NEGA_INT}, // nega int */
     {" ", TK_NOTYPE},          // spaces
     {"\\+", TK_PLUS},          // plus
     {"==", TK_EQ},             // equal
     {"-", TK_SUB},             // sub
+    {"&&", TK_AND},            // and
+    {"!=", TK_NOEQ},           // and
     {"\\*", TK_MULTI},         // equal
     {"\\/", TK_DIV},           // div
     {"\\(", TK_BRACKET_LEFT},  // bracket
@@ -319,6 +325,6 @@ word_t expr(char *e, bool *success) {
     return 0;
   }
   /* TODO: Insert codes to evaluate the expression. */
-  /*return 0;*/
-  return eval(0, nr_token - 1, success);
+  return 0;
+  /*return eval(0, nr_token - 1, success);*/
 }
