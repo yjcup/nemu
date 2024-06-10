@@ -310,6 +310,7 @@ word_t eval(int p, int q, bool *success) {
 
     return getTokenValue(&tokens[p], success);
   } else if (check_parentheses(p, q) == true) {
+    printf("input checkout ||\n");
     return eval(p + 1, q - 1, success);
   } else {
     // 找主运算符的位置
