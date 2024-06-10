@@ -248,7 +248,7 @@ bool check_parentheses(int p, int q) {
     if (tokens[i].type == TK_BRACKET_RIGHT) {
       flag_bracket--;
     }
-    if (flag_bracket == 0 && p != q) {
+    if (flag_bracket == 0 && i != q) {
       return false;
     }
   }
