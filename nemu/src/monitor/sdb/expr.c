@@ -259,6 +259,7 @@ int find_main_position(int p, int q, bool *success) {
   int flag_bracket = 0;
   for (int i = p; i <= q; i++) {
     /*if (tokens[i].type >= 262 && tokens[i].type <= 264)*/
+    // if no 运算符 continue
     if (tokens[i].type == TK_INT || tokens[i].type == TK_REG ||
         tokens[i].type == TK_HEX || tokens[i].type == TK_DEF ||
         tokens[i].type == TK_NEGA)
@@ -274,6 +275,8 @@ int find_main_position(int p, int q, bool *success) {
         *success = false;
         return 0;
       }
+      if (flag_bracket == 0)
+        return i;
       continue;
     }
     if (tokens[i].type == TK_PLUS || tokens[i].type == TK_SUB) {
