@@ -85,9 +85,11 @@ void deleteWP(uint32_t N, bool *success) {
       WP *temp = n_head->next;
       // nullpointer exception
       n_head->next = n_head->next->next;
+      if (temp == free_) {
+        free_ = n_head;
+      }
       end->next = temp;
       temp->next = NULL;
-
       return;
     }
     n_head = n_head->next;
