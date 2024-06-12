@@ -147,11 +147,14 @@ static int cmd_del_w(char *args) {
     printf("please input subcmd\n");
     return 0;
   }
-  /*bool success = true;*/
+  bool success = true;
   char *num = strtok(NULL, " ");
-  printf("%s\n", num);
-
-  return 1;
+  word_t res = expr(num, &success);
+  if (!success) {
+    printf("invalid expr!!\n");
+  }
+  deleteWP((uint32_t)res, &success);
+  return 0;
 }
 
 static int cmd_add_w(char *args) {
