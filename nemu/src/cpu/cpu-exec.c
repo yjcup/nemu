@@ -42,6 +42,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
     IFDEF(CONFIG_ITRACE, puts(_this->logbuf));
   }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
+  // watch point
 }
 
 static void exec_once(Decode *s, vaddr_t pc) {
@@ -111,6 +112,7 @@ void assert_fail_msg() {
 /* Simulate how the CPU works. */
 void cpu_exec(uint64_t n) {
   g_print_step = (n < MAX_INST_TO_PRINT);
+  // check status
   switch (nemu_state.state) {
   case NEMU_END:
   case NEMU_ABORT:

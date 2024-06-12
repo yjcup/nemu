@@ -143,7 +143,17 @@ static int cmd_p(char *args) {
 
 static int cmd_del_w(char *args) { return 1; }
 
-static int cmd_add_w(char *args) { return 0; }
+static int cmd_add_w(char *args) {
+
+  if (args == NULL) {
+    printf("please input subcmd\n");
+    return 0;
+  }
+  bool success = true;
+  addWP(args, &success);
+
+  return 0;
+}
 
 static int cmd_help(char *args);
 
