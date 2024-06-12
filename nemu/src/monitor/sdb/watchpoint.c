@@ -91,6 +91,7 @@ void deleteWP(uint32_t N, bool *success) {
       }
       end->next = temp;
       temp->next = NULL;
+      end = end->next;
       return;
     }
     n_head = n_head->next;
