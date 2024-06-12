@@ -22,4 +22,5 @@ word_t expr(char *e, bool *success);
 
 void addWP(char *exper, bool *success);
 
+void infoWP();
 #endif

@@ -100,7 +100,7 @@ static int cmd_info(char *args) {
       isa_reg_display();
       break;
     case 'w':
-      printf("todo watchpoint!!!\n");
+      infoWP();
       break;
     default:
       printf("unknown command:invaild input !!!\n");
