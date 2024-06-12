@@ -82,7 +82,6 @@ void deleteWP(uint32_t N, bool *success) {
   uint32_t i = 0;
   while (i < N && n_head != free_) {
     if (N == i + 1) {
-      printf("N==i+1:%d\n", i + 1);
       WP *temp = n_head->next;
       // nullpointer exception
       printf("num %d:exper:%s,value:%x\n", n_head->NO, n_head->str,
@@ -92,6 +91,8 @@ void deleteWP(uint32_t N, bool *success) {
       end->next = temp;
       temp->next = NULL;
       end = end->next;
+      printf("num %d:exper:%s,value:%x\n", n_head->NO, n_head->str,
+             n_head->value);
       return;
     }
     n_head = n_head->next;
