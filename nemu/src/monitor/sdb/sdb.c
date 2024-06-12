@@ -141,7 +141,18 @@ static int cmd_p(char *args) {
   return 0;
 }
 
-static int cmd_del_w(char *args) { return 1; }
+static int cmd_del_w(char *args) {
+
+  if (args == NULL) {
+    printf("please input subcmd\n");
+    return 0;
+  }
+  /*bool success = true;*/
+  char *num = strtok(NULL, " ");
+  printf("%s\n", num);
+
+  return 1;
+}
 
 static int cmd_add_w(char *args) {
 

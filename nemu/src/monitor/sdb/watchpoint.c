@@ -26,7 +26,7 @@ typedef struct watchpoint {
 } WP;
 
 static WP wp_pool[NR_WP] = {};
-static WP *head = NULL, *free_ = NULL;
+static WP *head = NULL, *free_ = NULL,*end= NULL;
 
 void init_wp_pool() {
   int i;
@@ -39,6 +39,7 @@ void init_wp_pool() {
 
   head = wp_pool;
   free_ = wp_pool;
+	end = &wp_pool[31];
 }
 
 /* TODO: Implement the functionality of watchpoint */
@@ -65,4 +66,32 @@ void infoWP() {
 // execute wp every time when starting
 void execute_wp() {}
 
-void deletewp(uint32_t N) {}
+// static link
+void deleteWP(uint32_t N,bool *success) {
+	//find the spec nodes by n 
+	//mid preivous nodes node->next = node->next->next
+	// 将节点挂在队尾才行
+	if(N==0){
+		end->next = head;
+		head = head->next;
+		head->next = NULL;
+		return;
+	}
+	WP *n_head = head;
+	uint32_t i = 0;
+	while(i<N&&head!=free_){
+			if(N==i+1){
+				WP *temp = n_head->next;
+				// nullpointer exception
+				n_head->next = n_head->next->next;
+				end->next = temp;
+				temp->next= NULL;
+
+				return;
+			}
+			n_head = n_head->next;
+			i++;
+	}
+	*success = false;
+
+}

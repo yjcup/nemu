@@ -23,4 +23,5 @@ word_t expr(char *e, bool *success);
 void addWP(char *exper, bool *success);
 
 void infoWP();
+void deleteWP(uint32_t N, bool *success);
 #endif
