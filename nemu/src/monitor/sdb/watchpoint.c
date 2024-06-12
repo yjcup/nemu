@@ -81,8 +81,8 @@ void deleteWP(uint32_t N, bool *success) {
   WP *n_head = head;
   uint32_t i = 0;
   while (i < N && n_head != free_) {
-    printf("N==i+1:%d\n", i + 1);
     if (N == i + 1) {
+      printf("N==i+1:%d\n", i + 1);
       WP *temp = n_head->next;
       // nullpointer exception
       printf("num %d:exper:%s,value:%x\n", n_head->NO, n_head->str,
