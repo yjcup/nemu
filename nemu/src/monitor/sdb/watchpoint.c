@@ -43,23 +43,21 @@ void init_wp_pool() {
 
 /* TODO: Implement the functionality of watchpoint */
 // add wp
-void addWP(char *exper,bool *success) {
+void addWP(char *exper, bool *success) {
   free_->str = exper;
   free_->value = expr(exper, success);
   if (!(*success)) {
     printf("add wp invaild!!\n");
     return;
   }
-  printf("exper:%s,value:%x", free_->str, free_->value);
+  printf("exper:%s,value:%x\n", free_->str, free_->value);
   free_ = free_->next;
 }
-
-
 
 void infowp() {
   WP *n_head = head;
   while (n_head != free_) {
-    printf("exper:%s,value:%x", n_head->str, n_head->value);
+    printf("exper:%s,value:%x\n", n_head->str, n_head->value);
     n_head++;
   }
 }
