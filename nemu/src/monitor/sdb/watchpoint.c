@@ -75,7 +75,8 @@ void deleteWP(uint32_t N, bool *success) {
   if (N == 0) {
     end->next = head;
     head = head->next;
-    head->next = NULL;
+    end = end->next;
+    end->next = NULL;
     return;
   }
   WP *n_head = head;
