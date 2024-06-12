@@ -80,7 +80,7 @@ void deleteWP(uint32_t N, bool *success) {
   }
   WP *n_head = head;
   uint32_t i = 0;
-  while (i < N && head != free_) {
+  while (i < N && n_head != free_) {
     if (N == i + 1) {
       WP *temp = n_head->next;
       // nullpointer exception
