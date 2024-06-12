@@ -71,7 +71,6 @@ void deleteWP(uint32_t N, bool *success) {
   // find the spec nodes by n
   // mid preivous nodes node->next = node->next->next
   //  将节点挂在队尾才行
-  printf("%d\n", N);
   if (N == 0) {
     end->next = head;
     head = head->next;
@@ -82,7 +81,7 @@ void deleteWP(uint32_t N, bool *success) {
   WP *n_head = head;
   uint32_t i = 0;
   while (i < N && n_head != free_) {
-    printf("into loop!!\n");
+    printf("N==i+1:%d\n", i + 1);
     if (N == i + 1) {
       WP *temp = n_head->next;
       // nullpointer exception
