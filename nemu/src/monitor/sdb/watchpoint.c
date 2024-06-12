@@ -60,7 +60,7 @@ void infoWP() {
   while (n_head != free_) {
     printf("num %d:exper:%s,value:%x\n", n_head->NO, n_head->str,
            n_head->value);
-    n_head++;
+    n_head = n_head->next;
   }
   printf("num %d:exper:%s,value:%x\n", end->NO, end->str, end->value);
 }
