@@ -39,7 +39,7 @@ void init_wp_pool() {
 
   head = wp_pool;
   free_ = wp_pool;
-  end = &wp_pool[31];
+  end = &wp_pool[NR_WP - 1];
 }
 
 /* TODO: Implement the functionality of watchpoint */
