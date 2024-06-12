@@ -62,6 +62,7 @@ void infoWP() {
            n_head->value);
     n_head++;
   }
+  printf("num %d:exper:%s,value:%x\n", end->NO, end->str, end->value);
 }
 // execute wp every time when starting
 void execute_wp() {}
@@ -91,8 +92,6 @@ void deleteWP(uint32_t N, bool *success) {
       end->next = temp;
       temp->next = NULL;
       end = end->next;
-      printf("num %d:exper:%s,value:%x\n", n_head->NO, n_head->str,
-             n_head->value);
       return;
     }
     n_head = n_head->next;
