@@ -62,7 +62,6 @@ void infoWP() {
            n_head->value);
     n_head = n_head->next;
   }
-  printf("num %d:exper:%s,value:%x\n", end->NO, end->str, end->value);
 }
 // execute wp every time when starting
 void execute_wp() {}
@@ -85,9 +84,6 @@ void deleteWP(uint32_t N, bool *success) {
     if (N == i + 1) {
       WP *temp = n_head->next;
       // nullpointer exception
-      printf("num %d:exper:%s,value:%x\n", n_head->NO, n_head->str,
-             n_head->value);
-      printf("num %d:exper:%s,value:%x\n", temp->NO, temp->str, temp->value);
       n_head->next = n_head->next->next;
       end->next = temp;
       temp->next = NULL;
