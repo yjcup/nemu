@@ -57,9 +57,9 @@ void addWP(char *exper, bool *success) {
 
 void infoWP() {
   WP *n_head = head;
+  uint32_t i = 0;
   while (n_head != free_) {
-    printf("num %d:exper:%s,value:%x\n", n_head->NO, n_head->str,
-           n_head->value);
+    printf("num %d:exper:%s,value:%x\n", i++, n_head->str, n_head->value);
     n_head = n_head->next;
   }
 }
