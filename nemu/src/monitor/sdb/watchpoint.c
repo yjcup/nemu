@@ -16,13 +16,14 @@
 #include "sdb.h"
 
 #define NR_WP 32
+#define WP_EXPER 32
 
 typedef struct watchpoint {
   int NO;
   struct watchpoint *next;
   /* TODO: Add more members if necessary */
   word_t value;
-  char *str;
+  char exper[WP_EXPER];
 } WP;
 
 static WP wp_pool[NR_WP] = {};
@@ -33,7 +34,6 @@ void init_wp_pool() {
   for (i = 0; i < NR_WP; i++) {
     wp_pool[i].NO = i;
     wp_pool[i].next = (i == NR_WP - 1 ? NULL : &wp_pool[i + 1]);
-    wp_pool[i].str = NULL;
     wp_pool[i].value = 0;
   }
 
@@ -45,13 +45,13 @@ void init_wp_pool() {
 /* TODO: Implement the functionality of watchpoint */
 // add wp
 void addWP(char *exper, bool *success) {
-  free_->str = exper;
+  strcpy(free_->exper, exper);
   free_->value = expr(exper, success);
   if (!(*success)) {
     printf("add wp invaild!!\n");
     return;
   }
-  printf("exper:%s,value:%x\n", free_->str, free_->value);
+  printf("exper:%s,value:%x\n", free_->exper, free_->value);
   free_ = free_->next;
 }
 
@@ -59,7 +59,7 @@ void infoWP() {
   WP *n_head = head;
   uint32_t i = 0;
   while (n_head != free_) {
-    printf("num %d:exper:%s,value:%x\n", i++, n_head->str, n_head->value);
+    printf("num %d:exper:%s,value:%x\n", i++, n_head->exper, n_head->value);
     n_head = n_head->next;
   }
 }
