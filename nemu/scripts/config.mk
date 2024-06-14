@@ -42,7 +42,10 @@ $(FIXDEP):
 	$(Q)$(MAKE) $(silent) -C $(FIXDEP_PATH)
 
 menuconfig: $(MCONF) $(CONF) $(FIXDEP)
+	# 图形界面 
 	$(Q)$(MCONF) $(Kconfig)
+	# 同步 .config的文件
+	# 正常的操作是要有终端询问的，所以使用静默安装
 	$(Q)$(CONF) $(silent) --syncconfig $(Kconfig)
 
 savedefconfig: $(CONF)

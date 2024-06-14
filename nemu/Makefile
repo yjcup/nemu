@@ -24,6 +24,8 @@ endif
 -include $(NEMU_HOME)/include/config/auto.conf
 -include $(NEMU_HOME)/include/config/auto.conf.cmd
 
+
+# qudiao $(1) %
 remove_quote = $(patsubst "%",%,$(1))
 
 # Extract variabls from menuconfig
